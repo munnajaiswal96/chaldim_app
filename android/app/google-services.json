@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "150941865624",
+    "project_id": "chaldim-tourist",
+    "storage_bucket": "chaldim-tourist.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:150941865624:android:58ca6609b4a3f77414e2ed",
+        "android_client_info": {
+          "package_name": "com.app.chaldim_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApAJo-Vt00RGk8B4kg6rlvfoer8hp6_oY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

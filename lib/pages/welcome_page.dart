@@ -1,4 +1,4 @@
-import 'package:chaldim_app/pages/main_page.dart';
+import 'package:chaldim_app/dashboard/main_page.dart';
 import 'package:chaldim_app/widgets/app_text_bold.dart';
 import 'package:chaldim_app/widgets/app_text_medium_bold.dart';
 import 'package:chaldim_app/widgets/responsive_button.dart';

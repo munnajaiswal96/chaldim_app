@@ -1,4 +1,4 @@
-package com.example.chaldim_app
+package com.app.chaldim_app
 
 import io.flutter.embedding.android.FlutterActivity
 

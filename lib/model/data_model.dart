@@ -1,7 +1,7 @@
 
 
 import 'package:chaldim_app/model/data_model.dart';
-
+//api
 class DataModel{
   String name;
   String img;

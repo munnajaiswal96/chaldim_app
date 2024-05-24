@@ -1,14 +1,19 @@
-//import 'package:chaldim_app/pages/detail_page_for.dart';
-import 'package:chaldim_app/pages/home_page.dart';
-import 'package:chaldim_app/pages/main_page.dart';
+import 'package:chaldim_app/authentication/authentication_repo.dart';
 import 'package:chaldim_app/pages/welcome_page.dart';
-import 'package:chaldim_app/services/data_services.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:get/get.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async{
+
+
+// ...
+ WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  ).then((value) => Get.put(AuthenticationRepo()));
   runApp(const MyApp());
 }
 
@@ -19,6 +24,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      // dark mode
+      // theme: ThemeData(brightness: Brightness.light),
+      // darkTheme: ThemeData(brightness: Brightness.dark),
+      // themeMode: ThemeMode.system,
+      //start from welcome page
       home: Welcomepage(),
     );
   }
