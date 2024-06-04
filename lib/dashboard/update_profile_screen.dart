@@ -74,99 +74,99 @@ class UpdateprofileScreen extends StatelessWidget {
                   ),
                 ],
               ),
-             SizedBox(height: 30,),
-             Form(
-                 child: Column(
-                   children: [
-                     TextFormField(
-                       decoration: InputDecoration(
-                         prefixIcon: Icon(Icons.person),
-                         labelText:'Full Nmae',
-                         hintText: "John Wick",
-                         border: OutlineInputBorder(),
-                       ),
-                     ),
-                     SizedBox(height: 30,),
-                     TextFormField(
-                       decoration: InputDecoration(
-                         prefixIcon: Icon(Icons.mail_outline),
-                         labelText:'E-mail',
-                         hintText: "john@gmail.com",
-                         border: OutlineInputBorder(),
-                       ),
-                     ),
-                     SizedBox(height: 30,),
-                     TextFormField(
-                       decoration: InputDecoration(
-                         prefixIcon: Icon(Icons.local_phone_sharp),
-                         labelText:'Phone Number',
-                         hintText: "+977-9*********",
-                         border: OutlineInputBorder(),
-                       ),
-                     ),
-                     SizedBox(height: 30,),
-                     TextFormField(
-                       decoration: InputDecoration(
-                         prefixIcon: Icon(Icons.fingerprint),
-                         labelText:'Password',
-                         hintText: "*******",
-                         border: OutlineInputBorder(),
-                       ),
-                     ),
-                     SizedBox(height: 30,),
-                     SizedBox(
-                       width: double.infinity,
-                       child: ElevatedButton(
-                         onPressed: (){
-                           Navigator.pop(
-                             context,
-                             MaterialPageRoute(builder: (context)=>ProfileScreen()),
-                           );
-                         },
-                         style: ElevatedButton.styleFrom(
-                           backgroundColor: Colors.orangeAccent,
-                           side: BorderSide.none,
-                           shape: StadiumBorder(),
-                         ),
-                         child: Text('Save',style: TextStyle(color: Colors.black),
-                         ),
-                       ),
-                     ),
-                     SizedBox(height: 30,),
-                     Row(
-                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                       children: [
-                         Text.rich(
-                           TextSpan(
-                            text: 'Joined on :',
-                            style: TextStyle(
-                              fontSize:12,
-                            ),
-                             children: [
-                               TextSpan(text: '1st May 2024',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 12),),
-                             ]
-                           ),
-                         ),
-                         ElevatedButton(
-                           onPressed: (){
-                             Navigator.pop(
-                               context,
-                               MaterialPageRoute(builder: (context)=>HomePage()),
-                             );
-                           },
-                           style: ElevatedButton.styleFrom(backgroundColor: Colors.red.withOpacity(0.1),
-                           elevation: 0,
-                           foregroundColor: Colors.red,
-                             shape: StadiumBorder(),
-                             side: BorderSide.none
-                         ),
-                           child: Text('Delete'),
-                         ),
-                       ],
-                     ),
-                   ],
-                 ),
-             ),
+              SizedBox(height: 30,),
+              Form(
+                child: Column(
+                  children: [
+                    TextFormField(
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.person),
+                        labelText:'Full Nmae',
+                        hintText: "John Wick",
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                    SizedBox(height: 30,),
+                    TextFormField(
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.mail_outline),
+                        labelText:'E-mail',
+                        hintText: "john@gmail.com",
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                    SizedBox(height: 30,),
+                    TextFormField(
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.local_phone_sharp),
+                        labelText:'Phone Number',
+                        hintText: "+977-9*********",
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                    SizedBox(height: 30,),
+                    TextFormField(
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.fingerprint),
+                        labelText:'Password',
+                        hintText: "*******",
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                    SizedBox(height: 30,),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: (){
+                          Navigator.pop(
+                            context,
+                            MaterialPageRoute(builder: (context)=>ProfileScreen()),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.orangeAccent,
+                          side: BorderSide.none,
+                          shape: StadiumBorder(),
+                        ),
+                        child: Text('Save',style: TextStyle(color: Colors.black),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 30,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text.rich(
+                          TextSpan(
+                              text: 'Joined on :',
+                              style: TextStyle(
+                                fontSize:12,
+                              ),
+                              children: [
+                                TextSpan(text: '1st May 2024',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 12),),
+                              ]
+                          ),
+                        ),
+                        ElevatedButton(
+                          onPressed: (){
+                            Navigator.pop(
+                              context,
+                              MaterialPageRoute(builder: (context)=>HomePage()),
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(backgroundColor: Colors.red.withOpacity(0.1),
+                              elevation: 0,
+                              foregroundColor: Colors.red,
+                              shape: StadiumBorder(),
+                              side: BorderSide.none
+                          ),
+                          child: Text('Delete'),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),

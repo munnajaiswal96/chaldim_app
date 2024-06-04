@@ -2,6 +2,7 @@ import 'package:chaldim_app/activitiespages/bunjumpingpage.dart';
 import 'package:chaldim_app/activitiespages/hikingpage.dart';
 import 'package:chaldim_app/activitiespages/paraglidingpage.dart';
 import 'package:chaldim_app/activitiespages/raftingpage.dart';
+//import 'package:chaldim_app/api/bungee/bugee_data.dart';
 import 'package:chaldim_app/colors_details/colors.dart';
 import 'package:chaldim_app/dashboard/profile_screen.dart';
 //import 'package:chaldim_app/pages/detail_page_for.dart';
@@ -13,6 +14,8 @@ import 'dart:ui';
 import 'package:flutter/widgets.dart';
 import 'package:video_player/video_player.dart';
 import 'package:chewie/chewie.dart';
+
+import '../../api/bungee/bungee_data.dart';
 
 
 
@@ -26,7 +29,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin{
   var images={
-    "bunjump.jpeg":"Bunjumping",
+    "bunjump.jpeg":"Bungee ",
     "hiking.jpg":"Hiking",
     "paragliding.jpg":"Paragliding",
     "rafting.jpg":"Rafting",
@@ -45,7 +48,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin{
 
   List quotes=[
     'Mountains, lakes, medieval cities and temples and vibrant culture – Nepal has almost everything. This small Himalayan country is the Holy Grail for adventure lovers. Some of the most iconic hiking trails of Himalayas are found in Nepal. So here are a few Quotes on Nepal that describes the beauty of this country. If you are looking for some travel inspirations or Nepal instagram captions, these quotes might help you.',    ''
-    'Heaven is a myth, Nepal is real.',
+        'Heaven is a myth, Nepal is real.',
     'Chasing angels or fleeing demons, go to the mountains.',
     'The mountains were so wild and so stark and so very beautiful that I wanted to cry. I breathed in another wonderful moment to keep safe in my heart.',
     'If a man says he is not afraid of dying, he is either lying or is a Gurkha.',
@@ -105,24 +108,24 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin{
         elevation: 0,
         backgroundColor: Colors.transparent,
         actions: [
-              Container(
-                margin: EdgeInsets.only(right: 20,left: 7),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.grey.withOpacity(0.3),
-                ),
-                child: IconButton(
-                  onPressed: (){
-                    Navigator.push(
-                        context,
-                     MaterialPageRoute(builder: (context)=>ProfileScreen()),
-                    );
-                  },
-                  icon: Image(
-                    image: AssetImage('assets/images/user_image.png'),
-                  ),
-                ),
+          Container(
+            margin: EdgeInsets.only(right: 20,left: 7),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.grey.withOpacity(0.3),
+            ),
+            child: IconButton(
+              onPressed: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context)=>ProfileScreen()),
+                );
+              },
+              icon: Image(
+                image: AssetImage('assets/images/user_image.png'),
               ),
+            ),
+          ),
         ],
       ),
       body: Column(
@@ -176,7 +179,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin{
                           color: Colors.white,
                           image:DecorationImage(
                             image: AssetImage(
-                                'assets/images/'+mountainsimages[index],
+                              'assets/images/'+mountainsimages[index],
                             ),
                             fit: BoxFit.cover,
                           ),
@@ -438,7 +441,8 @@ void _navigateToDestination(BuildContext context, int index) {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => BunjumpingPage(),
+          // builder: (context) => BunjumpingPage(),
+          builder: (context) => BungeeScreen(),
         ),
       );
       break;

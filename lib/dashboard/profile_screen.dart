@@ -3,7 +3,6 @@ import 'package:chaldim_app/dashboard/update_profile_screen.dart';
 import 'package:chaldim_app/fake_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -17,8 +16,8 @@ class ProfileScreen extends StatelessWidget {
           onPressed: () {
             // Add your onPressed code here!
             Navigator.pop(
-                context,
-            MaterialPageRoute(builder: (context)=>HomePage()),
+              context,
+              MaterialPageRoute(builder: (context)=>HomePage()),
             );
           },
           icon: Icon(LineAwesomeIcons.angle_left_solid),
@@ -58,20 +57,20 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   ),
                   Positioned(
-                      bottom:0,
-                      right: 0,
-                      child: Container(
-                        width: 35,
-                        height: 35,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(100),
-                          color: Colors.white38,
-                        ),
-                        child: Icon(LineAwesomeIcons.pen_solid,
+                    bottom:0,
+                    right: 0,
+                    child: Container(
+                      width: 35,
+                      height: 35,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(100),
+                        color: Colors.white38,
+                      ),
+                      child: Icon(LineAwesomeIcons.pen_solid,
                         color: Colors.black,
                         size: 20,
-                        ),
                       ),
+                    ),
                   ),
                 ],
               ),
@@ -80,22 +79,22 @@ class ProfileScreen extends StatelessWidget {
               Text('munna.191623@ncit.edu.np',style: TextStyle(color: Colors.black87),),
               SizedBox(height: 10,),
               SizedBox(
-                  width:200,
-                  child: ElevatedButton(
-                    onPressed: (){
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context)=>UpdateprofileScreen()),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.orangeAccent,
-                      side: BorderSide.none,
-                      shape: StadiumBorder(),
-                    ),
-                    child: Text('Edit Profile',style: TextStyle(color: Colors.black),
-                    ),
+                width:200,
+                child: ElevatedButton(
+                  onPressed: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context)=>UpdateprofileScreen()),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.orangeAccent,
+                    side: BorderSide.none,
+                    shape: StadiumBorder(),
                   ),
+                  child: Text('Edit Profile',style: TextStyle(color: Colors.black),
+                  ),
+                ),
               ),
               SizedBox(height: 20,),
               Divider(),

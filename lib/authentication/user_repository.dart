@@ -11,19 +11,36 @@ class UserRepo extends GetxController{
 
   get user => null;
 
-  createUser(UserModel) async {
+  //store user in firestore
+  createUser(UserModel user) async {
     await _db.collection('Users').add(user.toJson())
         .whenComplete(() => Get.snackbar('Success', 'Your account has been created.',
-    snackPosition: SnackPosition.BOTTOM,
-    backgroundColor: Colors.green.withOpacity(0.1),
-    colorText: Colors.green),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.green.withOpacity(0.1),
+        colorText: Colors.green),
     )
-    .catchError((error,stackTrace){
+        .catchError((error,stackTrace) {
       Get.snackbar('Error','Something went wrong. Try again',
-      snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: Colors.redAccent.withOpacity(0.1),
-        colorText: Colors.red);
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.redAccent.withOpacity(0.1),
+          colorText: Colors.red);
       print(error.toString());
     });
+
+
+
+  }
+
+  //fetch all users or user details
+  Future<UserModel> getUserDetails(String email) async {
+    final snapShot=await _db.collection('Users').where('Email',isEqualTo:email).get();
+    final userData=snapShot.docs.map((e)=>UserModel.fromSnapshot(e)).single;
+    return userData;
+  }
+
+  Future<List<UserModel>> getUser() async {
+    final snapShot=await _db.collection('Users').get();
+    final userData=snapShot.docs.map((e)=>UserModel.fromSnapshot(e)).toList();
+    return userData;
   }
 }
