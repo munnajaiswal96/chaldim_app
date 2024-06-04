@@ -49,6 +49,7 @@ dependencies:
   line_awesome_flutter: ^3.0.1
   video_player: ^2.8.6
   chewie: ^1.8.1
+  firebase_database: ^10.5.7
 
 dev_dependencies:
   flutter_test:

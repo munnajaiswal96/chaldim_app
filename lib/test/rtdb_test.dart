@@ -1,4 +1,5 @@
 //import 'package:chaldim_app/api/bungee/bugee_data.dart';
+import 'package:chaldim_app/api/bungee/add_posts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -47,8 +48,13 @@ class _TestScreenState extends State<TestScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-
+          Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context)=>AddPostsScreens(),
+              ),
+          );
         },
+        child: Icon(Icons.add),
       ),
     );
   }
