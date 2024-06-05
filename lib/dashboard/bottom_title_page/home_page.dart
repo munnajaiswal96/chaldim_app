@@ -1,7 +1,3 @@
-import 'package:chaldim_app/activitiespages/bunjumpingpage.dart';
-import 'package:chaldim_app/activitiespages/hikingpage.dart';
-import 'package:chaldim_app/activitiespages/paraglidingpage.dart';
-import 'package:chaldim_app/activitiespages/raftingpage.dart';
 //import 'package:chaldim_app/api/bungee/bugee_data.dart';
 import 'package:chaldim_app/colors_details/colors.dart';
 import 'package:chaldim_app/dashboard/profile_screen.dart';
@@ -15,7 +11,14 @@ import 'package:flutter/widgets.dart';
 import 'package:video_player/video_player.dart';
 import 'package:chewie/chewie.dart';
 
-import '../../api/bungee/bungee_data.dart';
+import '../../activitiespages/bungee_page.dart';
+import '../../activitiespages/canyoning_page.dart';
+import '../../activitiespages/hiking_page.dart';
+import '../../activitiespages/mountaine_biking_page.dart';
+import '../../activitiespages/paragliding_page.dart';
+import '../../activitiespages/rafting_page.dart';
+import '../../activitiespages/rockclimbing_page.dart';
+import '../../activitiespages/zipflyer_page.dart';
 
 
 
@@ -441,7 +444,6 @@ void _navigateToDestination(BuildContext context, int index) {
       Navigator.push(
         context,
         MaterialPageRoute(
-          // builder: (context) => BunjumpingPage(),
           builder: (context) => BungeeScreen(),
         ),
       );
@@ -450,7 +452,7 @@ void _navigateToDestination(BuildContext context, int index) {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => HikingPage(),
+          builder: (context) => HikingScreen(),
         ),
       );
       break;
@@ -458,7 +460,7 @@ void _navigateToDestination(BuildContext context, int index) {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => ParaglidingPage(),
+          builder: (context) => ParaglidingScreen(),
         ),
       );
       break;
@@ -466,7 +468,39 @@ void _navigateToDestination(BuildContext context, int index) {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => RaftingPage(),
+          builder: (context) => RaftingScreen(),
+        ),
+      );
+      break;
+    case 4:
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ZipFlyerScreen(),
+        ),
+      );
+      break;
+    case 5:
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => RockClimbingScreen(),
+        ),
+      );
+      break;
+    case 6:
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => MtBikingScreen(),
+        ),
+      );
+      break;
+    case 7:
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => CanyoningScreen(),
         ),
       );
       break;

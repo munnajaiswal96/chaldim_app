@@ -3,7 +3,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
-import 'bungee_data.dart';
+import '../../activitiespages/bungee_page.dart';
 
 class AddPostsScreens extends StatefulWidget {
   const AddPostsScreens({super.key});

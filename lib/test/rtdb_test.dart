@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
-import '../api/bungee/bungee_data.dart';
+import '../activitiespages/bungee_page.dart';
 
 class TestScreen extends StatefulWidget {
   const TestScreen({super.key});

@@ -6,7 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
-import 'bungee_data.dart';
+import '../../activitiespages/bungee_page.dart';
 
 class BungeeDataScreen extends StatefulWidget {
   const BungeeDataScreen({super.key});
