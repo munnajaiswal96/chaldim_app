@@ -3,6 +3,8 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
+import 'bungee_data.dart';
+
 class AddPostsScreens extends StatefulWidget {
   const AddPostsScreens({super.key});
 
@@ -14,8 +16,8 @@ class _AddPostsScreensState extends State<AddPostsScreens> {
 
   final postController=TextEditingController();
   bool loading=false;
-  final databaseRef=FirebaseDatabase.instance.ref('Post');
-
+  final databaseRefBungee=FirebaseDatabase.instance.ref('Bungee');
+  final databaseRefTreking=FirebaseDatabase.instance.ref('Treking');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +26,7 @@ class _AddPostsScreensState extends State<AddPostsScreens> {
           onPressed: () {
             Navigator.pop(
               context,
-              MaterialPageRoute(builder: (context) => TestScreen()),
+              MaterialPageRoute(builder: (context) => BungeeScreen()),
             );
           },
           icon: Icon(LineAwesomeIcons.angle_left_solid),
@@ -60,31 +62,56 @@ class _AddPostsScreensState extends State<AddPostsScreens> {
             ),
             SizedBox(height: 30,),
             RoundButton(
-              title: 'Add Posts',
+              title: 'Add Posts from here',
+            loading: loading,
             onTap: (){
-              // setState(() {
-              //   loading = true ;
-              // });
-              //
-              //
-              // String id  = DateTime.now().millisecondsSinceEpoch.toString() ;
-              // databaseRef.child(id).set({
-              //   'title' : postController.text.toString() ,
-              //   'id' : DateTime.now().millisecondsSinceEpoch.toString()
-              // }).then((value){
-              //   Utils().toastMessage('Post added');
-              //   setState(() {
-              //     loading = false ;
-              //   });
-              // }).onError((error, stackTrace){
-              //   Utils().toastMessage(error.toString());
-              //   setState(() {
-              //     loading = false ;
-              //   });
-              // });
-              databaseRef.child('1').set({
-                //'id':1,
+              setState(() {
+                loading = true ;
+              });
+              databaseRefBungee.child('Bhote Kosi Rover').set({
+                //'id':1, // this will gice fixed id which was entered by programmer.
+                'id':DateTime.now().millisecondsSinceEpoch.toString(), //this will generate random id by itself.
                 'title':postController.text.toString(),
+              }).then((value){
+                 print('this is for true conditions');
+                 setState(() {
+                   loading = false;
+                 });
+              }).onError((error, stackTrace){
+                print('this is for false conditions');
+                setState(() {
+                  loading = false;
+                });
+              });
+              databaseRefBungee.child('Hemja in Pokhara').set({
+                //'id':1, // this will gice fixed id which was entered by programmer.
+                'id':DateTime.now().millisecondsSinceEpoch.toString(), //this will generate random id by itself.
+                'title':postController.text.toString(),
+              }).then((value){
+                print('this is for true conditions');
+                setState(() {
+                  loading = false;
+                });
+              }).onError((error, stackTrace){
+                print('this is for false conditions');
+                setState(() {
+                  loading = false;
+                });
+              });
+              databaseRefTreking.child('treking').set({
+                //'id':1, // this will gice fixed id which was entered by programmer.
+                'id':DateTime.now().millisecondsSinceEpoch.toString(), //this will generate random id by itself.
+                'title':postController.text.toString(),
+              }).then((value){
+                print('this is for true conditions');
+                setState(() {
+                  loading = false;
+                });
+              }).onError((error, stackTrace){
+                print('this is for false conditions');
+                setState(() {
+                  loading = false;
+                });
               });
             },
             ),

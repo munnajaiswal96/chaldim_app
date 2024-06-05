@@ -116,10 +116,14 @@
 
 
 import 'package:chaldim_app/test/rtdb_test.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
 import '../../../dashboard/bottom_title_page/home_page.dart';
+import '../../dummy_page/data_test_screen.dart';
+import 'add_posts.dart';
+import 'bungee_data_screen.dart';
 
 class BungeeScreen extends StatefulWidget {
   const BungeeScreen({super.key});
@@ -130,20 +134,23 @@ class BungeeScreen extends StatefulWidget {
 
 class _BungeeScreenState extends State<BungeeScreen> {
   final List<Map<String, dynamic>> bungeeData = [
-    {'name': 'Name 1', 'location': 'Location 1', 'rating': 'Rating 1', 'price': 'Price 1', 'time':'Time','page': TestScreen()},
-    {'name': 'Name 2', 'location': 'Location 2', 'rating': 'Rating 2', 'price': 'Price 2','time':'Time', 'page': TestScreen()},
-    {'name': 'Name 3', 'location': 'Location 1', 'rating': 'Rating 1', 'price': 'Price 1', 'time':'Time','page': TestScreen()},
-    {'name': 'Name 4', 'location': 'Location 2', 'rating': 'Rating 2', 'price': 'Price 2','time':'Time', 'page': TestScreen()},
-    {'name': 'Name 5', 'location': 'Location 1', 'rating': 'Rating 1', 'price': 'Price 1', 'time':'Time','page': TestScreen()},
-    {'name': 'Name 6', 'location': 'Location 2', 'rating': 'Rating 2', 'price': 'Price 2','time':'Time', 'page': TestScreen()},
-    {'name': 'Name 7', 'location': 'Location 1', 'rating': 'Rating 1', 'price': 'Price 1', 'time':'Time','page': TestScreen()},
-    {'name': 'Name 8', 'location': 'Location 2', 'rating': 'Rating 2', 'price': 'Price 2','time':'Time', 'page': TestScreen()},
-    {'name': 'Name 9', 'location': 'Location 1', 'rating': 'Rating 1', 'price': 'Price 1', 'time':'Time','page': TestScreen()},
-    {'name': 'Name 10', 'location': 'Location 2', 'rating': 'Rating 2', 'price': 'Price 2','time':'Time', 'page': TestScreen()},
-    {'name': 'Name 11', 'location': 'Location 1', 'rating': 'Rating 1', 'price': 'Price 1', 'time':'Time','page': TestScreen()},
-    {'name': 'Name 12', 'location': 'Location 2', 'rating': 'Rating 2', 'price': 'Price 2','time':'Time', 'page': TestScreen()},
+   // {'name': 'Bhote Kosi River', 'location': 'Arniko Highway, Listikot, Nepal', 'rating': 'Rating 1', 'price': 'For Nepalese citizens: NPR 6,000 \nFor SAARC Countries and Chinese: NPR 9,000 \nFor Foreigners: NPR 12,000 ', 'time':'Time','page': TestScreen()},
+    {'name': 'Bhote Kosi River', 'location': 'Arniko Highway, Listikot, Nepal', 'rating': 'Rating 1', 'price': 'For Nepalese citizens: NPR 6,000 \nFor SAARC Countries and Chinese: NPR 9,000 \nFor Foreigners: NPR 12,000 ', 'time':'Time','page': BungeeDataScreen()},
+    {'name': 'Hemja, Pokhara', 'location': ' Highground Bungee, Hemja, Pokhara, Kaski district, Nepal', 'rating': 'Rating 2', 'price': 'For Nepalese citizens: NPR 4,000 \nFor SAARC countries: NPR 6,500 \nFor Foreigners: NPR 7,500','time':'Time', 'page': AddPostsScreens()},
+    {'name': 'Bungy Nepal Adventure', 'location': ' Pardi Bazaar, Pokhara 33700, Nepal', 'rating': 'Rating 1', 'price': 'Price 1', 'time':'9:00 AM – 5:00 PM','page': DataTestScreen()},
+    {'name': 'Highground Bungee Station', 'location': 'Baglung Rajmarg, Pokhara 33700, Nepal', 'rating': 'Rating 2', 'price': 'Price 2','time':'9:00 AM – 5:00 PM', 'page': TestScreen()},
+    {'name': 'Bhotekosi Bungee Jump', 'location': 'Araniko Highway, Listikot 45301, Nepal', 'rating': 'Rating 1', 'price': 'Price 1', 'time':'Open 24 hours','page': TestScreen()},
+    {'name': 'The Last Resort ', 'location': 'Mandala Street, Kathmandu 44600, Nepal', 'rating': 'Rating 2', 'price': 'Price 2','time':' 10:00 AM – 7:00 PM', 'page': TestScreen()},
+    {'name': 'The Eco-Trek', 'location': 'Tri-Devi Marg, Thamel, Kathmandu, Nepal', 'rating': 'Rating 1', 'price': 'Price 1', 'time':'8:00 AM – 7:00 PM','page': TestScreen()},
+    {'name': 'Nepal Eco Adventure', 'location': ' Satghumti, Thamel, kathmandu, Nepal', 'rating': 'Rating 2', 'price': 'Price 2','time':'8:00 AM – 7:00 PM', 'page': TestScreen()},
+    // {'name': 'Name 9', 'location': 'Location 1', 'rating': 'Rating 1', 'price': 'Price 1', 'time':'Time','page': TestScreen()},
+    // {'name': 'Name 10', 'location': 'Location 2', 'rating': 'Rating 2', 'price': 'Price 2','time':'Time', 'page': TestScreen()},
+    // {'name': 'Name 11', 'location': 'Location 1', 'rating': 'Rating 1', 'price': 'Price 1', 'time':'Time','page': TestScreen()},
+    // {'name': 'Name 12', 'location': 'Location 2', 'rating': 'Rating 2', 'price': 'Price 2','time':'Time', 'page': TestScreen()},
     // Add more rows as needed
   ];
+
+  final auth=FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -174,6 +181,16 @@ class _BungeeScreenState extends State<BungeeScreen> {
           ),
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context)=>AddPostsScreens(),
+            ),
+          );
+        },
+        child: Icon(Icons.add),
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: bungeeData.map((data) => buildBungeeRow(context, data)).toList(),
@@ -187,9 +204,11 @@ class _BungeeScreenState extends State<BungeeScreen> {
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
         onTap: () {
+          //this is for row navigation when user click any row then it will navigate to another page
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => data['page']),
+           // MaterialPageRoute(builder: (context)=>AddPostsScreens()),
           );
         },
         child: Container(
