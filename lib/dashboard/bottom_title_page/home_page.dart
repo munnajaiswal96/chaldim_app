@@ -566,16 +566,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
-  // var images = {
-  //   "bunjump.jpeg": "Bungee",
-  //   "hiking.jpg": "Hiking",
-  //   "paragliding.jpg": "Paragliding",
-  //   "rafting.jpg": "Rafting",
-  //   "zip_flyer.jpeg": "Zip Flyer",
-  //   "rock_climbing.jpeg": "Rock Climbing",
-  //   "mountain_biking.jpeg": "Mountain Biking",
-  //   "canyoning.jpeg": "Canyoning",
-  // };
 
   List mountainsimages = [
     "mountain.jpg",
@@ -636,76 +626,15 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   final auth = FirebaseAuth.instance;
   final ref = FirebaseDatabase.instance.ref('Explore');
 
-  void _navigateToDestination(BuildContext context, String title) {
-    switch (title) {
-      case 'Bungee':
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => BungeeScreen(),
-          ),
-        );
-        break;
-      case 'Hiking':
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => HikingScreen(),
-          ),
-        );
-        break;
-      case 'Paragliding':
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => ParaglidingScreen(),
-          ),
-        );
-        break;
-      case 'Rafting':
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => RaftingScreen(),
-          ),
-        );
-        break;
-      case 'Zip Flyer':
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => ZipFlyerScreen(),
-          ),
-        );
-        break;
-      case 'Rock Climbing':
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => RockClimbingScreen(),
-          ),
-        );
-        break;
-      case 'Mountain Biking':
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => MtBikingScreen(),
-          ),
-        );
-        break;
-      case 'Canyoning':
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => CanyoningScreen(),
-          ),
-        );
-        break;
-      default:
-        break;
-    }
+  void _navigateToDestination(BuildContext context, String title){
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ListingScreen(passedArgument: '$title'),
+      ),
+    );
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -976,10 +905,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   snapshot.child('img').value.toString();
                   String title =
                   snapshot.child('title').value.toString();
-                  String id =
-                  snapshot.child('id').value.toString();
+                  // String id =
+                  // snapshot.child('id').value.toString();
                   return GestureDetector(
                     onTap: () {
+                      print('10th june $title');
+
                       _navigateToDestination(context, title);
                     },
                     child: Container(
@@ -1004,15 +935,15 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                               text: title,
                             ),
                           ),
-                          SizedBox(height: 5),
-                          Container(
-                            child: Flexible(
-                              child: Text(
-                                id,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                          ),
+                          // SizedBox(height: 5),
+                          // Container(
+                          //   child: Flexible(
+                          //     child: Text(
+                          //       id,
+                          //       overflow: TextOverflow.ellipsis,
+                          //     ),
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),

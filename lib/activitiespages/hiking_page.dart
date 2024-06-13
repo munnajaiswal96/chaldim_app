@@ -1,13 +1,19 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
-
-
+import '../activities_pages_data/hiking/annapurna_base_camp_trek.dart';
+import '../activities_pages_data/hiking/everest_base_camp_trek.dart';
+import '../activities_pages_data/hiking/ghorepani_poon_hill_trek.dart';
+import '../activities_pages_data/hiking/langtang_valley_trek.dart';
+import '../activities_pages_data/hiking/manaslu_circuit_trek.dart';
 import '../dashboard/bottom_title_page/home_page.dart';
-import '../test/rtdb_test.dart';
+
 
 class HikingScreen extends StatefulWidget {
-  const HikingScreen({super.key});
+  final String passedArgument;
+  const HikingScreen({super.key, required this.passedArgument});
 
   @override
   State<HikingScreen> createState() => _HikingScreenState();
@@ -15,24 +21,55 @@ class HikingScreen extends StatefulWidget {
 
 class _HikingScreenState extends State<HikingScreen> {
 
-  final List<Map<String, dynamic>> hikingData = [
-    {'name': 'Name 12', 'location': 'Location 2', 'rating': 'Rating 2', 'price': 'Price 2','time':'Time', 'page': TestScreen()},
-     {'name': 'Name 12', 'location': 'Location 2', 'rating': 'Rating 2', 'price': 'Price 2','time':'Time', 'page': TestScreen()},
-    {'name': 'Name 12', 'location': 'Location 2', 'rating': 'Rating 2', 'price': 'Price 2','time':'Time', 'page': TestScreen()},
-    {'name': 'Name 12', 'location': 'Location 2', 'rating': 'Rating 2', 'price': 'Price 2','time':'Time', 'page': TestScreen()},
-    {'name': 'Name 12', 'location': 'Location 2', 'rating': 'Rating 2', 'price': 'Price 2','time':'Time', 'page': TestScreen()},
-    {'name': 'Name 12', 'location': 'Location 2', 'rating': 'Rating 2', 'price': 'Price 2','time':'Time', 'page': TestScreen()},
-    {'name': 'Name 12', 'location': 'Location 2', 'rating': 'Rating 2', 'price': 'Price 2','time':'Time', 'page': TestScreen()},
-    {'name': 'Name 12', 'location': 'Location 2', 'rating': 'Rating 2', 'price': 'Price 2','time':'Time', 'page': TestScreen()},
-    {'name': 'Name 12', 'location': 'Location 2', 'rating': 'Rating 2', 'price': 'Price 2','time':'Time', 'page': TestScreen()},
-    {'name': 'Name 12', 'location': 'Location 2', 'rating': 'Rating 2', 'price': 'Price 2','time':'Time', 'page': TestScreen()},
-    {'name': 'Name 12', 'location': 'Location 2', 'rating': 'Rating 2', 'price': 'Price 2','time':'Time', 'page': TestScreen()},
+  late final DatabaseReference ref;
+
+  @override
+  void initState() {
+    super.initState();
+    ref = FirebaseDatabase.instance.reference().child(widget.passedArgument);
+    print(ref);
+  }
+
+  final auth = FirebaseAuth.instance;
+  //final ref = FirebaseDatabase.instance.ref('Hiking');
 
 
-    // Add more rows as needed
-  ];
-
-  final auth=FirebaseAuth.instance;
+  void _navigateToDestination(BuildContext context, String title) {
+    switch (title) {
+      case 'Everest Base Camp Trek':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => EverestBaseCamp()),
+        );
+        break;
+      case 'Annapurna Base Camp Trek':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => AnnapurnaBaseCamp()),
+        );
+        break;
+      case 'Manaslu Circuit Trek':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ManasluTrek()),
+        );
+        break;
+      case 'Langtang Valley Trek':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => LangtangValleyTrek()),
+        );
+        break;
+      case 'Ghorepani Poon Hill Trek':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => GhorepaniHillTrek()),
+        );
+        break;
+      default:
+        break;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,108 +100,93 @@ class _HikingScreenState extends State<HikingScreen> {
           ),
         ],
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: (){
-      //     Navigator.push(
-      //       context,
-      //       MaterialPageRoute(builder: (context)=>AddPostsScreens(),
-      //       ),
-      //     );
-      //   },
-      //   child: Icon(Icons.add),
-      // ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: hikingData.map((data) => buildBungeeRow(context, data)).toList(),
-        ),
-      ),
-    );
-  }
-
-  Widget buildBungeeRow(BuildContext context, Map<String, dynamic> data) {
-    return Padding(
+      body:Column(
+          children: [
+      // Display the passed argument
+      Padding(
       padding: const EdgeInsets.all(8.0),
-      child: GestureDetector(
-        onTap: () {
-          //this is for row navigation when user click any row then it will navigate to another page
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => data['page']),
-            // MaterialPageRoute(builder: (context)=>AddPostsScreens()),
-          );
-        },
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.blue.shade50, // Apply background color
-            borderRadius: BorderRadius.circular(8), // Add rounded corners
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 2,
-                blurRadius: 5,
-                offset: Offset(0, 3),
-              ),
-            ],
-          ),
-          padding: EdgeInsets.all(16.0),
-          child: Row(
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //   children: [
-                    //     Text(data['name'], style: TextStyle(color: Colors.black, fontSize: 20)),
-                    //     Text(data['location'], style: TextStyle(fontSize: 15, color: Colors.grey)),
-                    //   ],
-                    // ),
-                    Text(data['name'], style: TextStyle(fontSize: 16, color: Colors.black)),
-                    SizedBox(height: 8), // Add spacing between the text sections
-                    Text(data['location'], style: TextStyle(fontSize: 16, color: Colors.black)),
-                    SizedBox(height: 8),
-                    Text(data['rating'], style: TextStyle(fontSize: 16, color: Colors.black)),
-                    SizedBox(height: 8),
-                    Text(data['price'], style: TextStyle(fontSize: 16, color: Colors.black)),
-                    SizedBox(height: 8),
-                    Text(data['time'], style: TextStyle(fontSize: 16, color: Colors.black)),
-                  ],
-                ),
-              ),
-              SizedBox(width: 16), // Add some spacing between the columns
-              Expanded(
+      child: Text(
+        'Passed Argument: ${widget.passedArgument}',
+        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+      ),
+    ), Expanded(
+        child: FirebaseAnimatedList(
+          query: ref,
+          itemBuilder: (context, snapshot, animation, index) {
+            final Map<dynamic, dynamic> data = snapshot.value as Map<
+                dynamic,
+                dynamic>;
+            final title = data['title'].toString();
+            final location = data['location'].toString();
+            final price = data['price'].toString();
+            final time = data['time'].toString();
+            final rating = data['rating'].toString();
+            final img = data['img'].toString();
+
+            return Padding(
+              padding: EdgeInsets.all(8.0),
+              child: GestureDetector(
+                onTap: () => _navigateToDestination(context, title),
                 child: Container(
-                  height: 100, // Set a fixed height for the image container
                   decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('assets/images/bunjump.jpeg'),
-                      fit: BoxFit.cover,
-                    ),
+                    color: Colors.blue.shade50,
                     borderRadius: BorderRadius.circular(8),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 2,
+                        blurRadius: 5,
+                        offset: Offset(0, 3),
+                      ),
+                    ],
+                  ),
+                  padding: EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(title, style: TextStyle(
+                                fontSize: 16, color: Colors.black)),
+                            SizedBox(height: 8),
+                            Text(location, style: TextStyle(
+                                fontSize: 16, color: Colors.black)),
+                            SizedBox(height: 8),
+                            Text(price, style: TextStyle(
+                                fontSize: 16, color: Colors.black)),
+                            SizedBox(height: 8),
+                            Text(time, style: TextStyle(
+                                fontSize: 16, color: Colors.black)),
+                            SizedBox(height: 8),
+                            Text(rating, style: TextStyle(
+                                fontSize: 16, color: Colors.black)),
+                          ],
+                        ),
+                      ),
+                      SizedBox(width: 16),
+                      Expanded(
+                        child: Container(
+                          height: 100,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: NetworkImage(img),
+                              fit: BoxFit.cover,
+                            ),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
-            ],
-          ),
+            );
+          },
         ),
       ),
+    ]
+    ),
     );
   }
 }
-
-// Placeholder for the details pages
-class DetailsPage1 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Details Page 1'),
-      ),
-      body: Center(
-        child: Text('Details about Bungy Jumping 1'),
-      ),
-    );
-  }
-}
-

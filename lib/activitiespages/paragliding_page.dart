@@ -1,9 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
-
+import '../activities_pages_data/paragliding/Godawari.dart';
+import '../activities_pages_data/paragliding/bandipur.dart';
+import '../activities_pages_data/paragliding/pokhara_sarankot.dart';
+import '../activities_pages_data/paragliding/sirkot.dart';
+import '../api/bungee/bungee_data_screen.dart';
 import '../dashboard/bottom_title_page/home_page.dart';
-import '../test/rtdb_test.dart';
+
 
 class ParaglidingScreen extends StatefulWidget {
   const ParaglidingScreen({super.key});
@@ -14,24 +20,40 @@ class ParaglidingScreen extends StatefulWidget {
 
 class _ParaglidingScreenState extends State<ParaglidingScreen> {
 
-  final List<Map<String, dynamic>> paraglidingData = [
-    {'name': 'Name 12', 'location': 'Location 2', 'rating': 'Rating 2', 'price': 'Price 2','time':'Time', 'page': TestScreen()},
-    {'name': 'Name 12', 'location': 'Location 2', 'rating': 'Rating 2', 'price': 'Price 2','time':'Time', 'page': TestScreen()},
-    {'name': 'Name 12', 'location': 'Location 2', 'rating': 'Rating 2', 'price': 'Price 2','time':'Time', 'page': TestScreen()},
-    {'name': 'Name 12', 'location': 'Location 2', 'rating': 'Rating 2', 'price': 'Price 2','time':'Time', 'page': TestScreen()},
-    {'name': 'Name 12', 'location': 'Location 2', 'rating': 'Rating 2', 'price': 'Price 2','time':'Time', 'page': TestScreen()},
-    {'name': 'Name 12', 'location': 'Location 2', 'rating': 'Rating 2', 'price': 'Price 2','time':'Time', 'page': TestScreen()},
-    {'name': 'Name 12', 'location': 'Location 2', 'rating': 'Rating 2', 'price': 'Price 2','time':'Time', 'page': TestScreen()},
-    {'name': 'Name 12', 'location': 'Location 2', 'rating': 'Rating 2', 'price': 'Price 2','time':'Time', 'page': TestScreen()},
-    {'name': 'Name 12', 'location': 'Location 2', 'rating': 'Rating 2', 'price': 'Price 2','time':'Time', 'page': TestScreen()},
-    {'name': 'Name 12', 'location': 'Location 2', 'rating': 'Rating 2', 'price': 'Price 2','time':'Time', 'page': TestScreen()},
-    {'name': 'Name 12', 'location': 'Location 2', 'rating': 'Rating 2', 'price': 'Price 2','time':'Time', 'page': TestScreen()},
-
-
-    // Add more rows as needed
-  ];
 
   final auth=FirebaseAuth.instance;
+  final ref = FirebaseDatabase.instance.ref('Paragliding');
+
+  void _navigateToDestination(BuildContext context, String title) {
+    switch (title) {
+      case 'Pokhara (Sarangkot)':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Sagarnkot()),
+        );
+        break;
+      case 'Bandipur':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Bandipur()),
+        );
+        break;
+      case 'Sirkot':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Sirkot()),
+        );
+        break;
+      case 'Kathmandu (Godawari)':
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Godawari()),
+        );
+        break;
+      default:
+        break;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,106 +84,80 @@ class _ParaglidingScreenState extends State<ParaglidingScreen> {
           ),
         ],
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: (){
-      //     Navigator.push(
-      //       context,
-      //       MaterialPageRoute(builder: (context)=>AddPostsScreens(),
-      //       ),
-      //     );
-      //   },
-      //   child: Icon(Icons.add),
-      // ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: paraglidingData.map((data) => buildBungeeRow(context, data)).toList(),
-        ),
-      ),
-    );
-  }
 
-  Widget buildBungeeRow(BuildContext context, Map<String, dynamic> data) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: GestureDetector(
-        onTap: () {
-          //this is for row navigation when user click any row then it will navigate to another page
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => data['page']),
-            // MaterialPageRoute(builder: (context)=>AddPostsScreens()),
-          );
-        },
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.blue.shade50, // Apply background color
-            borderRadius: BorderRadius.circular(8), // Add rounded corners
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 2,
-                blurRadius: 5,
-                offset: Offset(0, 3),
-              ),
-            ],
-          ),
-          padding: EdgeInsets.all(16.0),
-          child: Row(
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+      body:FirebaseAnimatedList(
+        query: ref,
+        itemBuilder: (context, snapshot, animation, index) {
+          final Map<dynamic, dynamic> data = snapshot.value as Map<
+              dynamic,
+              dynamic>;
+          final title = data['title'].toString();
+          final location = data['location'].toString();
+          final price = data['price'].toString();
+          final time = data['time'].toString();
+          final rating = data['rating'].toString();
+          final img = data['img'].toString();
+
+          return Padding(
+            padding: EdgeInsets.all(8.0),
+            child: GestureDetector(
+              onTap: () => _navigateToDestination(context, title),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.blue.shade50,
+                  borderRadius: BorderRadius.circular(8),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 2,
+                      blurRadius: 5,
+                      offset: Offset(0, 3),
+                    ),
+                  ],
+                ),
+                padding: EdgeInsets.all(8.0),
+                child: Row(
                   children: [
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //   children: [
-                    //     Text(data['name'], style: TextStyle(color: Colors.black, fontSize: 20)),
-                    //     Text(data['location'], style: TextStyle(fontSize: 15, color: Colors.grey)),
-                    //   ],
-                    // ),
-                    Text(data['name'], style: TextStyle(fontSize: 16, color: Colors.black)),
-                    SizedBox(height: 8), // Add spacing between the text sections
-                    Text(data['location'], style: TextStyle(fontSize: 16, color: Colors.black)),
-                    SizedBox(height: 8),
-                    Text(data['rating'], style: TextStyle(fontSize: 16, color: Colors.black)),
-                    SizedBox(height: 8),
-                    Text(data['price'], style: TextStyle(fontSize: 16, color: Colors.black)),
-                    SizedBox(height: 8),
-                    Text(data['time'], style: TextStyle(fontSize: 16, color: Colors.black)),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(title, style: TextStyle(
+                              fontSize: 16, color: Colors.black)),
+                          SizedBox(height: 8),
+                          Text(location, style: TextStyle(
+                              fontSize: 16, color: Colors.black)),
+                          SizedBox(height: 8),
+                          Text(price, style: TextStyle(
+                              fontSize: 16, color: Colors.black)),
+                          SizedBox(height: 8),
+                          Text(time, style: TextStyle(
+                              fontSize: 16, color: Colors.black)),
+                          SizedBox(height: 8),
+                          Text(rating, style: TextStyle(
+                              fontSize: 16, color: Colors.black)),
+                        ],
+                      ),
+                    ),
+                    SizedBox(width: 16),
+                    Expanded(
+                      child: Container(
+                        height: 100,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: NetworkImage(img),
+                            fit: BoxFit.cover,
+                          ),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
-              SizedBox(width: 16), // Add some spacing between the columns
-              Expanded(
-                child: Container(
-                  height: 100, // Set a fixed height for the image container
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('assets/images/bunjump.jpeg'),
-                      fit: BoxFit.cover,
-                    ),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-// Placeholder for the details pages
-class DetailsPage1 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Details Page 1'),
-      ),
-      body: Center(
-        child: Text('Details about Bungy Jumping 1'),
+            ),
+          );
+        },
       ),
     );
   }
